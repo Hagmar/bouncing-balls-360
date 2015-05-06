@@ -1,4 +1,5 @@
 import java.awt.geom.Ellipse2D;
+import java.util.Random;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,12 +17,12 @@ public class DummyModel implements IBouncingBallsModel {
 		this.areaHeight = height;
 
 		balls = new LinkedList<Ball>();
-		balls.add(new Ball("two", 1, 1, 5, 7, 5, 1, 9.81));
-		balls.add(new Ball("two", 1, 3, 1, 4, 10, 1, 9.81));
-//		balls.add(new Ball("two", 1, 5, 5, 7, 5, 0.5, 9.81));
-//		balls.add(new Ball("two", 1, 7, 1, 4, 10, 0.5, 9.81));
-//		balls.add(new Ball("two", 1, 9, 5, 7, 5, 0.5, 9.81));
-//		balls.add(new Ball("two", 1, 11, 1, 4, 10, 0.5, 9.81));
+//		Random rand = new Random();
+//		for (int i=0; i<400; i++){
+//			balls.add(new Ball("bajs", 1, rand.nextInt(50)+1,rand.nextInt(40)+1, rand.nextInt(11)+1,rand.nextInt(11)+1,0.5,9.81));
+//		}
+		balls.add(new Ball("two", 1, 0, 9, 7, 5, 1, 9.81));
+		balls.add(new Ball("two", 10000, 5, 3, -3, 7, 1, 9.81));
 	}
 
 	private class Tuple<X, Y> {
@@ -49,6 +50,7 @@ public class DummyModel implements IBouncingBallsModel {
 		for (int i = 0; i < balls.size() - 1; i++) {
 			for (int j = i + 1; j < balls.size(); j++) {
 				calculateBounce(balls.get(i), balls.get(j));
+//				calculateBounce(balls.get(j), balls.get(i));
 			}
 		}
 	}
@@ -104,6 +106,7 @@ public class DummyModel implements IBouncingBallsModel {
 			phi *= -1;
 			phi += 2*Math.PI;
 		}
+
 		return new PolarCoordinate(phi, length);
 	}
 	
@@ -115,7 +118,11 @@ public class DummyModel implements IBouncingBallsModel {
 
 	private double axisRotation(double x1, double y1, double x2, double y2){
 		double length = Math.sqrt(Math.pow(x1-x2, 2)+Math.pow(y1-y2, 2));
+//		double angle = Math.acos((y1-y2)/length);
 		double angle = Math.acos(Math.abs(y1-y2)/length);
+		if (((x1 > x2) && (y1 < y2)) || ((x2 > x1) && (y2 < y1))){
+			angle *= -1;
+		}
 		return angle;
 	}
 	

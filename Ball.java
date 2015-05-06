@@ -31,8 +31,9 @@ public class Ball {
 			vy = Math.abs(vy);
 		} else if (y > areaHeight - r) {
 			vy = -Math.abs(vy);
+		} else{
+			vy -= g * deltaT;
 		}
-		vy -= g * deltaT;
 		x += vx * deltaT;
 		y += vy * deltaT;
 	}

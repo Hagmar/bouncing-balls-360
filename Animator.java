@@ -20,7 +20,7 @@ import javax.swing.JApplet;
 @SuppressWarnings("serial")
 public abstract class Animator extends JApplet {
 
-	private static final double MAX_FRAMERATE = 60;
+	private static final double MAX_FRAMERATE = 20;
 	private static final double MIN_FRAMERATE = 10;
 
 	private double fps;

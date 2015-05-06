@@ -22,8 +22,8 @@ public class PolarCoordinate {
 		this.r = r;
 	}
 	
-	public void rotate(double r){
-		this.r = (this.r + r) % (2*Math.PI);
+	public void rotate(double phi){
+		this.phi = (this.phi + phi + 2*Math.PI) % (2*Math.PI);
 	}
 	
 	@Override

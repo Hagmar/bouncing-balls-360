@@ -22,14 +22,17 @@ public class Ball {
 	}
 
 	public void tick(double deltaT, double areaWidth, double areaHeight) {
-		if (x < r || x > areaWidth - r) {
-			vx *= -1;
+		if (x < r) {
+			vx = Math.abs(vx);
+		} else if (x > areaWidth - r) {
+			vx = -Math.abs(vx);
 		}
-		if (y < r || y > areaHeight - r) {
-			vy *= -1;
-		} else {
-			vy -= g * deltaT;
+		if (y < r) {
+			vy = Math.abs(vy);
+		} else if (y > areaHeight - r) {
+			vy = -Math.abs(vy);
 		}
+		vy -= g * deltaT;
 		x += vx * deltaT;
 		y += vy * deltaT;
 	}
@@ -44,7 +47,7 @@ public class Ball {
 	public Ellipse2D.Double getEllipse2D() {
 		return new Ellipse2D.Double(x - r, y - r, 2 * r, 2 * r);
 	}
-	
+
 	public void setVx(double vx) {
 		this.vx = vx;
 	}
@@ -79,5 +82,9 @@ public class Ball {
 
 	public double getVy() {
 		return vy;
+	}
+
+	public double getM() {
+		return m;
 	}
 }
